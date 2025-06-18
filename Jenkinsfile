@@ -8,18 +8,22 @@ pipeline {
                     dir('src') {
 
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh "docker build -t shaikmustafa/cartservice:latest ."
-                    }
+                        sh "docker build -t anildoc143/cartservice:latest ."
                         }
+                    }
                 }
             }
         }
-        
+        stage('Scan Docker Image') {
+            steps {
+                sh 'trivy image --exit-code 1 --severity CRITICAL,HIGH anildoc143/cartservice:latest || exit 1'
+            }
+        }
         stage('Push Docker Image') {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh "docker push shaikmustafa/cartservice:latest "
+                        sh "docker push anildoc143/cartservice:latest "
                     }
                 }
             }
