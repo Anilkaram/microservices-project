@@ -80,3 +80,5 @@ sh '''
 ☸️ Deployed to AWS EKS via manifests in main branch
 
 🔄 Fully automated via Jenkins Multibranch Pipeline
+
+![image](https://github.com/user-attachments/assets/753b1c67-6cd8-4c8e-bbf0-ec20f12da14d)
