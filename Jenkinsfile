@@ -6,17 +6,21 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh "docker build -t shaikmustafa/emailservice:latest ."
+                        sh "docker build -t anildoc143/emailservice:latest ."
                     }
                 }
             }
         }
-        
+        stage('Scan Docker Image') {
+            steps {
+                sh 'trivy image --exit-code 1 --severity CRITICAL,HIGH anildoc143/emailservice:latest || exit 1'
+            }
+        }
         stage('Push Docker Image') {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh "docker push shaikmustafa/emailservice:latest "
+                        sh "docker push anildoc143/emailservice:latest "
                     }
                 }
             }
