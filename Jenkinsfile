@@ -1,4 +1,4 @@
-pipeline {
+dpipeline {
     agent any
 
     stages {
@@ -14,7 +14,7 @@ pipeline {
 
         stage('Scan Docker Image') {
             steps {
-                sh 'trivy image anildoc143/adservice:latest"
+                sh 'trivy image --exit-code 1 --severity CRITICAL,HIGH anildoc143/adservice:latest || exit 1'
             }
         }
         
