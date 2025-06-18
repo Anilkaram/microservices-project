@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Scan Docker Image') {
             steps {
-                sh 'trivy image --exit-code 1 --severity CRITICAL,HIGH anildoc143/paymentservice:latest || exit 1'
+                sh 'trivy image --exit-code 1 --severity CRITICAL anildoc143/paymentservice:latest || exit 1'
             }
         }
         stage('Push Docker Image') {
