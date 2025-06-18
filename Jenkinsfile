@@ -6,9 +6,14 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh "docker build -t shaikmustafa/checkoutservice:latest ."
+                        sh "docker build -t anildoc143/checkoutservice:latest ."
                     }
                 }
+            }
+        }
+        stage('Scan Docker Image') {
+            steps {
+                sh 'trivy image --exit-code 1 --severity CRITICAL,HIGH anildoc143/checkoutservice:latest || exit 1'
             }
         }
         
@@ -16,7 +21,7 @@ pipeline {
             steps {
                 script {
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh "docker push shaikmustafa/checkoutservice:latest "
+                        sh "docker push anildoc143/checkoutservice:latest "
                     }
                 }
             }
