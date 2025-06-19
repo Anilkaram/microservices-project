@@ -80,10 +80,12 @@ sh '''
 ☸️ Deployed to AWS EKS via manifests in main branch
 
 🔄 Fully automated via Jenkins Multibranch Pipeline
-CI pipeline(build, scan, push to Dockerhub)
+# CI pipeline(build, scan, push to Dockerhub)
 ![image](https://github.com/user-attachments/assets/753b1c67-6cd8-4c8e-bbf0-ec20f12da14d)
-CD(deploy, slack, Monitoring)
+# CD(deploy, slack, Monitoring)
 ![image](https://github.com/user-attachments/assets/2ce84b61-cc87-4194-9a38-ba8ea1997729)
-Application output
+# Application output
 ![image](https://github.com/user-attachments/assets/3b263d94-8a9e-4699-9bf6-fdb51bc9657c)
+# Intregrate Slack
+![Screenshot (226)](https://github.com/user-attachments/assets/5c96e7c0-83e5-47e8-adf4-b181882dbe05)
 
