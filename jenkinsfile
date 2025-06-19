@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    stages {
+        stage ('code') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Anilkaram/microservices-project.git'
+            }
+        }
+        stage ('deploy') {
+            steps {
+                withKubeCredentials(kubectlCredentials: [[caCertificate: '', clusterName: 'new-EKS-1', contextName: '', credentialsId: 'k8-token', namespace: 'webapps', serverUrl: 'https://9E93DCA41B92497422B8BA4E0D81AF13.gr7.us-east-1.eks.amazonaws.com']]) {
+                    sh 'kubectl create -f deployment-service.yml'
+                }
+            }
+        }
+    }
+    post {
+        success {
+            slackSend channel: 'deployment-status', message: "✅ Pipeline SUCCESS: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}\nURL: ${env.BUILD_URL}"
+        }
+        failure {
+            slackSend channel: 'deployment-status', message: "❌ Pipeline FAILED: ${env.JOB_NAME} - Build #${env.BUILD_NUMBER}\nURL: ${env.BUILD_URL}"
+        }
+    }
+}
